@@ -154,7 +154,28 @@ export const getProblemById = async (req, res) => {
 // TODO: IMPLEMENT BY YOUR SELF🔥
 export const updateProblem = async (req, res) => {
   // id
+  const {id} = req.params;
   // id--->problem ( condition)
+  try {
+    const problem = await db.problem.findUnique({ where: { id } });
+
+    if (!problem) {
+      return res.status(404).json({ error: "Problem Not found" });
+    }
+    await db.problem.update({ where: { id } });
+
+    res.status(200).json({
+      success: true,
+      message: "Problem updated Successfully",
+    });
+
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({
+      error: "Error While updating the problem",
+    });
+  
+  }
   // baaki kaam same as create
 };
 

@@ -124,9 +124,9 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
-  password: 'password',
   image: 'image',
   role: 'role',
+  password: 'password',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -141,10 +141,51 @@ exports.Prisma.ProblemScalarFieldEnum = {
   examples: 'examples',
   constraints: 'constraints',
   hints: 'hints',
-  editorials: 'editorials',
-  testCases: 'testCases',
+  editorial: 'editorial',
+  testcases: 'testcases',
   codeSnippets: 'codeSnippets',
-  referneceSolution: 'referneceSolution',
+  referenceSolutions: 'referenceSolutions',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SubmissionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  problemId: 'problemId',
+  sourceCode: 'sourceCode',
+  language: 'language',
+  stdin: 'stdin',
+  stdout: 'stdout',
+  stderr: 'stderr',
+  compileOutput: 'compileOutput',
+  status: 'status',
+  memory: 'memory',
+  time: 'time',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TestCaseResultScalarFieldEnum = {
+  id: 'id',
+  submissionId: 'submissionId',
+  testCase: 'testCase',
+  passed: 'passed',
+  stdout: 'stdout',
+  expected: 'expected',
+  stderr: 'stderr',
+  compileOutput: 'compileOutput',
+  status: 'status',
+  memory: 'memory',
+  time: 'time',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProblemSolvedScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  problemId: 'problemId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -178,7 +219,7 @@ exports.UserRole = exports.$Enums.UserRole = {
   USER: 'USER'
 };
 
-exports.difficulty = exports.$Enums.difficulty = {
+exports.Difficulty = exports.$Enums.Difficulty = {
   EASY: 'EASY',
   MEDIUM: 'MEDIUM',
   HARD: 'HARD'
@@ -186,7 +227,10 @@ exports.difficulty = exports.$Enums.difficulty = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  problem: 'problem'
+  Problem: 'Problem',
+  Submission: 'Submission',
+  TestCaseResult: 'TestCaseResult',
+  ProblemSolved: 'ProblemSolved'
 };
 
 /**

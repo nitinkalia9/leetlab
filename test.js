@@ -1,4 +1,4 @@
-const data = `{
+const data = `{ 
     "title": "Add Two Numbers",
     "description": "Given two numbers a and b add them up and return the outout",
     "difficulty": "EASY",
