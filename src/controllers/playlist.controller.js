@@ -12,23 +12,28 @@ export const createPlayList = async (req, res) => {
         userId,
       },
     });
+
     res.status(200).json({
       success: true,
       message: "Playlist created successfully",
       playList,
     });
+
   } catch (error) {
     console.error("Error creating playlist:", error);
     res.status(500).json({ error: "Failed to create playlist" });
   }
 };
 
+
 export const getPlayAllListDetails = async (req, res) => {
   try {
+
     const playLists = await db.playlist.findMany({
       where: {
         userId: req.user.id,
       },
+
       include: {
         problems: {
           include: {
@@ -37,20 +42,25 @@ export const getPlayAllListDetails = async (req, res) => {
         },
       },
     });
+
     res.status(200).json({
       success: true,
       message: "Playlist fetched successfully",
       playLists,
     });
+
+
   } catch (error) {
     console.error("Error fetching playlist:", error);
     res.status(500).json({ error: "Failed to fetch playlist" });
   }
 };
+
 export const getPlayListDetails = async (req, res) => {
   const { playlistId } = req.params;
 
   try {
+
     const playList = await db.playlist.findUnique({
       where: { id: playlistId, userId: req.user.id },
       include: {
@@ -62,9 +72,11 @@ export const getPlayListDetails = async (req, res) => {
       },
     });
 
+
     if (!playList) {
       return res.status(404).json({ error: "Playlist not found" });
     }
+
 
     res.status(200).json({
       success: true,
@@ -83,6 +95,7 @@ export const addProblemToPlaylist = async (req, res) => {
 
   try {
     // Ensure problemIds is an array
+
     if (!Array.isArray(problemIds) || problemIds.length === 0) {
       return res.status(400).json({ error: "Invalid or missing problemIds" });
     }
@@ -93,6 +106,7 @@ export const addProblemToPlaylist = async (req, res) => {
         problemId,
       }))
     );
+
 
     // Create records for each problem in the playlist
     const problemsInPlaylist = await db.problemInPlaylist.createMany({
@@ -107,6 +121,7 @@ export const addProblemToPlaylist = async (req, res) => {
       message: "Problems added to playlist successfully",
       problemsInPlaylist,
     });
+    
   } catch (error) {
     console.error("Error adding problems to playlist:", error.message);
     res.status(500).json({ error: "Failed to add problems to playlist" });
