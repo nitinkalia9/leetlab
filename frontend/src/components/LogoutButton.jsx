@@ -13,7 +13,7 @@ const LogoutButton = ({children})=>{
 
 
     return (
-        <button className="btn btn-primary" onClick={onLogout}> 
+        <button  height='10' backgroundColor='solid' className="btn btn-primary" onClick={onLogout}> 
             {children}
         </button>
     )

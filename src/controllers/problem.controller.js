@@ -126,14 +126,14 @@ export const getAllProblems = async (req, res) => {
 
 export const getProblemById = async (req, res) => {
   const { id } = req.params;
-
+  
   try {
     const problem = await db.problem.findUnique({
       where: {
         id,
       },
     });
-
+    
     if (!problem) {
       return res.status(404).json({ error: "Problem not found." });
     }
@@ -158,11 +158,12 @@ export const updateProblem = async (req, res) => {
   // id--->problem ( condition)
   try {
     const problem = await db.problem.findUnique({ where: { id } });
+    
 
     if (!problem) {
       return res.status(404).json({ error: "Problem Not found" });
     }
-    await db.problem.update({ where: { id } });
+    // await db.problem.update({ where: { id } });
 
     res.status(200).json({
       success: true,
@@ -177,6 +178,8 @@ export const updateProblem = async (req, res) => {
   
   }
   // baaki kaam same as create
+  
+  
 };
 
 export const deleteProblem = async (req, res) => {

@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 
 
 export const useActions = create((set)=>({
+    onEditProblem:false,
     isDeletingProblem:false,
 
     onDeleteProblem:async(id)=>{
@@ -21,3 +22,17 @@ export const useActions = create((set)=>({
         }
     }
 }))
+ 
+onEditProblem:async(id)=>{
+    try {
+         set({ onEditProblem: true });
+        const res = await axiosInstance.update(`/problems/update-problem/${id}`);
+        toast.success(res.data.message);
+    } catch (error) {
+         console.log("Error updating problem", error);
+        toast.error("Error updaing problem");
+    }
+    finally{
+        set({onEditProblem:false})
+    }
+}

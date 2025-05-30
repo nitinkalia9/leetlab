@@ -6,11 +6,14 @@ import { useActions } from "../store/useAction";
 import AddToPlaylistModal from "./AddToPlaylist";
 import CreatePlaylistModal from "./CreatePlaylistModal";
 import { usePlaylistStore } from "../store/usePlaylistStore";
+import { useProblemStore } from "../store/useProblemStore";
+
 
 
 const ProblemsTable = ({ problems }) => {
+  const { getAllProblems } = useProblemStore();
   const { authUser } = useAuthStore();
-  const { onDeleteProblem } = useActions();
+  const { onDeleteProblem , onEditProblem} = useActions();
   const { createPlaylist } = usePlaylistStore();
   const [search, setSearch] = useState("");
   const [difficulty, setDifficulty] = useState("ALL");
@@ -56,9 +59,15 @@ const ProblemsTable = ({ problems }) => {
   }, [filteredProblems, currentPage]);
 
   const handleDelete = (id) => {
-    onDeleteProblem(id);
+    onDeleteProblem(id); 
+    setTimeout(() => {
+      getAllProblems();
+    }, 1000);
   };
 
+  const handleEdit = (id) => {
+    onEditProblem(id);
+  }
   const handleCreatePlaylist = async (data) => {
     await createPlaylist(data);
   };
@@ -185,7 +194,9 @@ const ProblemsTable = ({ problems }) => {
                             >
                               <TrashIcon className="w-4 h-4 text-white" />
                             </button>
-                            <button disabled className="btn btn-sm btn-warning">
+                            <button  
+                            onClick={() => handleEdit(problem.id)}
+                            className="btn btn-sm btn-warning">
                               <PencilIcon className="w-4 h-4 text-white" />
                             </button>
                           </div>

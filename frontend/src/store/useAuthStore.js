@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
+import { data } from "react-router-dom";
 
 export const useAuthStore = create((set) => ({
   authUser: null,
@@ -11,7 +12,7 @@ export const useAuthStore = create((set) => ({
   checkAuth: async () => {
     set({ isCheckingAuth: true });
     try {
-      const res = await axiosInstance.get("/auth/check");
+      const res = await axiosInstance.get("/auth/profile");
       console.log("checkauth response", res.data);
 
       set({ authUser: res.data.user });
@@ -66,4 +67,15 @@ export const useAuthStore = create((set) => ({
       toast.error("Error logging out");
     }
   },
+
+  // profile: async (data)=> {
+    
+  //   try {
+  //     const res = await axiosInstance.get("/auth/profile");
+  //     set({ authUser: res.data.user });
+  //     console.log("checkauth response", res.data);
+  //   } catch (error) {
+  //     toast.error("Error fetching data");
+  //   }
+  // }
 }));

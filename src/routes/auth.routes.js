@@ -11,7 +11,7 @@ authRoutes.post("/login", login)
 
 authRoutes.post("/logout", authMiddleware, logout)
 
-authRoutes.get("/check", authMiddleware, check)
+authRoutes.get("/profile", authMiddleware, check)
 
 
 export default authRoutes;
